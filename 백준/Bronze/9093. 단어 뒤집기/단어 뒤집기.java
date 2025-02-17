@@ -11,11 +11,11 @@ public class Main{
         for (int i = 0; i < n; i++) {
             String str = scan.nextLine();
             String[] result = str.split(" ");
+            StringBuilder sb = new StringBuilder();
             for (String arg : result) {
-                StringBuilder sb = new StringBuilder(arg).reverse();
-                System.out.print(sb + " ");
+                sb.append(new StringBuilder(arg).reverse()).append(" ");
             }
-            System.out.println();
+            System.out.print(sb);
         }
     }
 }
