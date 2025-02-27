@@ -1,2 +1,19 @@
-# Algorithm
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# 
+# 백준 & 프로그래머스 & SWEA 문제 풀이 목록
+
+프로그래머스의 경우, 푼 문제 목록에 대한 마이그레이션이 필요합니다.
+
+## 📚 백준
+### 🚀 Bronze
+| 문제번호 | 링크 |
+| ----- | ----- |
+|10818. 최소， 최대|[링크](./%EB%B0%B1%EC%A4%80/Bronze/10818.%E2%80%85%EC%B5%9C%EC%86%8C%EF%BC%8C%E2%80%85%EC%B5%9C%EB%8C%80/README.md)|
+|11654. 아스키 코드|[링크](./%EB%B0%B1%EC%A4%80/Bronze/11654.%E2%80%85%EC%95%84%EC%8A%A4%ED%82%A4%E2%80%85%EC%BD%94%EB%93%9C/README.md)|
+|1546. 평균|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1546.%E2%80%85%ED%8F%89%EA%B7%A0/README.md)|
+|1978. 소수 찾기|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1978.%E2%80%85%EC%86%8C%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0/%EC%86%8C%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0.java)|
+|25083. 새싹|[링크](./%EB%B0%B1%EC%A4%80/Bronze/25083.%E2%80%85%EC%83%88%EC%8B%B9/README.md)|
+|27866. 문자와 문자열|[링크](./%EB%B0%B1%EC%A4%80/Bronze/27866.%E2%80%85%EB%AC%B8%EC%9E%90%EC%99%80%E2%80%85%EB%AC%B8%EC%9E%90%EC%97%B4/README.md)|
+|2798. 블랙잭|[링크](./%EB%B0%B1%EC%A4%80/Bronze/2798.%E2%80%85%EB%B8%94%EB%9E%99%EC%9E%AD/README.md)|
+|30802. 웰컴 키트|[링크](./%EB%B0%B1%EC%A4%80/Bronze/30802.%E2%80%85%EC%9B%B0%EC%BB%B4%E2%80%85%ED%82%A4%ED%8A%B8/%EC%9B%B0%EC%BB%B4%E2%80%85%ED%82%A4%ED%8A%B8.java)|
+|4153. 직각삼각형|[링크](./%EB%B0%B1%EC%A4%80/Bronze/4153.%E2%80%85%EC%A7%81%EA%B0%81%EC%82%BC%EA%B0%81%ED%98%95/README.md)|
+|9093. 단어 뒤집기|[링크](./%EB%B0%B1%EC%A4%80/Bronze/9093.%E2%80%85%EB%8B%A8%EC%96%B4%E2%80%85%EB%92%A4%EC%A7%91%EA%B8%B0/%EB%8B%A8%EC%96%B4%E2%80%85%EB%92%A4%EC%A7%91%EA%B8%B0.java)|
