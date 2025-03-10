@@ -21,3 +21,7 @@
 |30802. 웰컴 키트|[링크](./%EB%B0%B1%EC%A4%80/Bronze/30802.%E2%80%85%EC%9B%B0%EC%BB%B4%E2%80%85%ED%82%A4%ED%8A%B8/%EC%9B%B0%EC%BB%B4%E2%80%85%ED%82%A4%ED%8A%B8.java)|
 |4153. 직각삼각형|[링크](./%EB%B0%B1%EC%A4%80/Bronze/4153.%E2%80%85%EC%A7%81%EA%B0%81%EC%82%BC%EA%B0%81%ED%98%95/README.md)|
 |9093. 단어 뒤집기|[링크](./%EB%B0%B1%EC%A4%80/Bronze/9093.%E2%80%85%EB%8B%A8%EC%96%B4%E2%80%85%EB%92%A4%EC%A7%91%EA%B8%B0/%EB%8B%A8%EC%96%B4%E2%80%85%EB%92%A4%EC%A7%91%EA%B8%B0.java)|
+### 🚀 Silver
+| 문제번호 | 링크 |
+| ----- | ----- |
+|1181. 단어 정렬|[링크](./%EB%B0%B1%EC%A4%80/Silver/1181.%E2%80%85%EB%8B%A8%EC%96%B4%E2%80%85%EC%A0%95%EB%A0%AC/README.md)|
