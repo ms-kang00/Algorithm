@@ -10,7 +10,7 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
-        Queue<Integer> queue = new LinkedList<>();
+        Deque<Integer> queue = new ArrayDeque<>();
 
         StringTokenizer st;
         for (int i = 0; i < N; i++) {
@@ -19,13 +19,13 @@ public class Main {
 
             if (s.equals("push")) {
                 int a = Integer.parseInt(st.nextToken());
-                queue.offer(a);
+                queue.offerLast(a);
             } else if (s.equals("pop")) {
                 if (queue.isEmpty()) {
                     bw.write(-1 + "\n");
                 } else {
 
-                    bw.write(queue.poll() + "\n");
+                    bw.write(queue.pollFirst() + "\n");
                 }
             } else if (s.equals("size")) {
                 bw.write(queue.size() + "\n");
@@ -39,18 +39,13 @@ public class Main {
                 if (queue.isEmpty()) {
                     bw.write(-1 + "\n");
                 } else {
-                    bw.write(queue.peek() + "\n");
+                    bw.write(queue.peekFirst() + "\n");
                 }
             } else if (s.equals("back")) {
                 if (queue.isEmpty()) {
                     bw.write(-1 + "\n");
                 } else {
-
-                    int last = 0;
-                    for (int a : queue) {
-                        last = a;
-                    }
-                    bw.write(last + "\n");
+                    bw.write(queue.peekLast() + "\n");
                 }
             }
         }
