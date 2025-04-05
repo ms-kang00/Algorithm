@@ -3,78 +3,85 @@ import java.util.*;
 
 public class Main {
     static int T;
-    static boolean[] visited;
-    static String[] lines;
-    static Queue<Integer> q = new LinkedList<>();
     static int A, B;
+    static boolean[] visited;
+    static class DSLR {
+        int num;
+        String line;
+
+        public DSLR(int num, String line) {
+            this.num = num;
+            this.line = line;
+        }
+
+        public int D() {
+            return (2 * num) % 10000;
+        }
+
+        public int S() {
+            return (num == 0) ? 9999 : num - 1;
+        }
+
+        public int L() {
+            return (num % 1000) * 10 + (num / 1000);
+        }
+
+        public int R() {
+            return (num % 10) * 1000 + (num / 10);
+        }
+    }
     
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        visited = new boolean[10000];
-        lines = new String[10000];
         
         int T = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < T; i++) {
-            
+            visited = new boolean[10000];
             StringTokenizer st = new StringTokenizer(br.readLine());
             A = Integer.parseInt(st.nextToken());
             B = Integer.parseInt(st.nextToken());
-            Arrays.fill(lines, "");
-            Arrays.fill(visited, false);
-            
-            q.clear();
-            bfs();
-            bw.write(lines[B] + "\n");
+            BFS(bw);
         }
-        
-
-        bw.flush();
         br.close();
+        bw.flush();
         bw.close();
     }
     
-    private static void bfs() {
-        q.add(A);
+    private static void BFS(BufferedWriter bw) throws IOException{
+        
+        Queue<DSLR> q = new LinkedList<>();
         visited[A] = true;
-
+        q.offer(new DSLR(A, ""));
+        
         while (!q.isEmpty()) {
-            int n = q.poll();
+            DSLR dslr = q.poll();
 
-            if(n == B){
-                break;
+            if (dslr.num == B) {
+                bw.write(dslr.line + "\n");
+                return;
             }
 
-            int D = (n * 2) % 10000;
-            int S = (n == 0) ? 9999 : n - 1;
-            int L = (n % 1000) * 10 + (n / 1000);
-            int R = (n % 10) * 1000 + (n / 10);
-
-            if (!visited[D]) {
-                q.add(D);
-                visited[D] = true;
-                lines[D] = lines[n] + "D";
+            if (!visited[dslr.D()]) {
+                visited[dslr.D()] = true;
+                q.offer(new DSLR(dslr.D(), dslr.line + "D"));
             }
 
-            if (!visited[S]) {
-                q.add(S);
-                visited[S] = true;
-                lines[S] = lines[n] + "S";
+            if (!visited[dslr.S()]) {
+                visited[dslr.S()] = true;
+                q.offer(new DSLR(dslr.S(), dslr.line + "S"));
             }
 
-            if (!visited[L]) {
-                q.add(L);
-                visited[L] = true;
-                lines[L] = lines[n] + "L";
+            if (!visited[dslr.L()]) {
+                visited[dslr.L()] = true;
+                q.offer(new DSLR(dslr.L(), dslr.line + "L"));
             }
 
-            if (!visited[R]) {
-                q.add(R);
-                visited[R] = true;
-                lines[R] = lines[n] + "R";
+            if (!visited[dslr.R()]) {
+                visited[dslr.R()] = true;
+                q.offer(new DSLR(dslr.R(), dslr.line + "R"));
             }
         }
     }
