@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         n = Integer.parseInt(br.readLine());
         StringTokenizer st;
@@ -47,8 +47,9 @@ public class Main {
 
         }
 
-        sb.append(count + "\n");
-        System.out.print(count);
+        bw.write(count + "\n");
         br.close();
+        bw.flush();
+        bw.close();
     }
 }
