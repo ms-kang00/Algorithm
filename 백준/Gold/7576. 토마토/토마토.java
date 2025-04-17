@@ -40,28 +40,30 @@ public class Main {
                 }
             }
         }
-        int result = bfs(list);
+        bfs(list);
 
-        if (isRipe()) {
-            System.out.println(result);
-        } else {
-            System.out.println("-1");
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (map[i][j] == 0) {
+                    System.out.println("-1");
+                    return;
+                }
+                result = Math.max(result, map[i][j]);
+            }
         }
 
+        System.out.println(result - 1);
     }
 
-    private static int bfs(List<Point> start) {
+    private static void bfs(List<Point> start) {
         Queue<Point> queue = new ArrayDeque<>();
         for (Point p : start) {
             queue.offer(p);
             visited[p.x][p.y] = true;
         }
-        
-        int count = 0;
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int s = 0; s < size; s++) {
                 Point p = queue.poll();
 
                 for (int i = 0; i < 4; i++) {
@@ -69,31 +71,12 @@ public class Main {
                     int curY = p.y + dy[i];
 
                     if (curX >= 0 && curY >= 0 && curX < n && curY < m) {
-                        if (!visited[curX][curY] && map[curX][curY] == 0) {
-                            map[curX][curY] = 1;
-                            visited[curX][curY] = true;
+                        if (map[curX][curY] == 0) {
+                            map[curX][curY] = map[p.x][p.y] + 1;
                             queue.offer(new Point(curX, curY));
                         }
                     }
-
-                }
-            }
-            
-            if (!queue.isEmpty()) {
-                count++;
-            }   
-        }
-        return count;
-    }
-
-    private static boolean isRipe() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (map[i][j] == 0) {
-                    return false;
-                }
             }
         }
-        return true;
     }
 }
