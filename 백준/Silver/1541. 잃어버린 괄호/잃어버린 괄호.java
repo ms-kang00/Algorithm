@@ -19,10 +19,7 @@ public class Main {
             String[] plusNum = minusNum[i].split("\\+");
             int sum = 0;
             for (String line : plusNum) {
-                if (!line.isEmpty()) {
-
-                    sum += Integer.parseInt(line);
-                }
+                sum += Integer.parseInt(line);
             }
 
             if (i==0) {
