@@ -30,8 +30,8 @@ public class Main {
             comp.put(list.get(i), i);
         }
         
-        for (int i = 0; i < n; i++) {
-            bw.write(comp.get(map[i]) + " ");
+        for (int i : map) {
+            bw.write(comp.get(i) + " ");
         }
 
         
