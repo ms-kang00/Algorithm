@@ -16,7 +16,7 @@ public class Main {
         c = Integer.parseInt(st.nextToken());
 
         int size = (int)Math.pow(2, n);
-        divide(0, 0, r, c, size);
+        divide(0, 0, size);
 
         bw.write(result + "\n");
         
@@ -25,23 +25,23 @@ public class Main {
     
     }
 
-    static void divide(int y, int x, int r, int c, int size) {
+    static void divide(int y, int x, int size) {
         if (size == 1) return;
 
         int half = size / 2;
         int block = half * half;
 
         if (r < y + half && c < x + half) {
-            divide(y, x, r, c, half);
+            divide(y, x, half);
         } else if (r < y + half && c >= x + half) {
             result += block;
-            divide(y, x + half, r, c, half);
+            divide(y, x + half, half);
         } else if (r >= y + half && c < x + half) {
             result += block * 2;
-            divide(y + half, x, r, c, half);
+            divide(y + half, x, half);
         } else if (r >= y + half && c >= x + half) {
             result += block * 3;
-            divide(y + half, x + half, r, c, half);
+            divide(y + half, x + half, half);
         }
     }
 }
