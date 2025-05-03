@@ -3,7 +3,15 @@ import java.util.*;
 
 public class Main {
     static int t;
-    static Deque<Integer> q;
+    static Deque<String> q;
+    static class Status {
+        boolean reverse, empty;
+
+        public Status(boolean reverse, boolean empty) {
+            this.reverse = reverse;
+            this.empty = empty;
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         
@@ -24,54 +32,60 @@ public class Main {
                 String[] element = input.split(",");
 
                 for (String str : element) {
-                    q.offer(Integer.parseInt(str));
+                    q.offer(str);
                 }
             }
-            boolean reverse = false;
-            boolean empty = false;
 
-        
-            for (int j = 0; j < s.length(); j++) {
-                
-                if (s.charAt(j) == 'R') {
-                    reverse = !reverse;
-                } else if (s.charAt(j) == 'D') {
-                    if (q.isEmpty()) {
-                        empty = true;
-                        break;
-                    }
-                    if (reverse) {
-                        q.removeLast();
-                    } else {
-                        q.removeFirst();
-                    }
-                }
-            }
-    
-            if (empty) {
-                bw.write("error\n");
-            } else {
-                bw.write("[");
-                while (!q.isEmpty()) {
-                    if (reverse) {
-                        bw.write(q.removeLast().toString());
-                    } else {
-                        bw.write(q.removeFirst().toString());
-                    }
-                    if (!q.isEmpty()) {
-                        bw.write(",");
-                    }
-                }
-                bw.write("]\n");
-            }
+            Status status = checkRD(s);
+            printResult(bw, status.reverse, status.empty);
+            
         
         }
 
-        
-        
         bw.flush();
         bw.close();
     
+    }
+
+    static Status checkRD(String str) {
+        boolean reverse = false;
+        boolean empty = false;
+        for (int j = 0; j < str.length(); j++) {
+                
+            if (str.charAt(j) == 'R') {
+                reverse = !reverse;
+            } else if (str.charAt(j) == 'D') {
+                if (q.isEmpty()) {
+                    empty = true;
+                    break;
+                }
+                if (reverse) {
+                    q.removeLast();
+                } else {
+                    q.removeFirst();
+                }
+            }
+        }
+        return new Status(reverse, empty);
+    }
+
+    static void printResult(BufferedWriter bw, boolean reverse, boolean empty) throws Exception{
+        if (empty) {
+            bw.write("error\n");
+        } else {
+            bw.write("[");
+            while (!q.isEmpty()) {
+                if (reverse) {
+                    bw.write(q.removeLast());
+                } else {
+                    bw.write(q.removeFirst());
+                }
+                if (!q.isEmpty()) {
+                    bw.write(",");
+                }
+            }
+            bw.write("]\n");
+        }
     }
 
 }
