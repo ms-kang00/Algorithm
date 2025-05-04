@@ -4,18 +4,8 @@ import java.util.*;
 public class Main {
     static int n, m;
     static int[][] map;
-    static boolean[][] visited;
     static int max;
-    static int[] dx = {0, 0, -1, 1};
-    static int[] dy = {-1, 1, 0, 0};
-
-    static class Point {
-        int x, y;
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
+    
 
     public static void main(String[] args) throws Exception {
         
@@ -27,7 +17,6 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         map = new int[n][m];
-        visited = new boolean[n][m];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -36,13 +25,9 @@ public class Main {
             }
         }
 
-        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                visited[i][j] = true;
-                dfs(i, j, 1, map[i][j]);
-                visited[i][j] = false;
-                checkTShape(i, j);
+                checkShape(i, j);
             }
         }
 
@@ -53,49 +38,98 @@ public class Main {
     
     }
 
-    static void dfs(int x, int y, int depth, int sum) {
-        Point p = new Point(x, y);
-        if (depth == 4) {
-            max = Math.max(max, sum);
-            return;
+    static void checkShape(int x, int y) {
+        // - 모양
+        if (y + 3 < m) {
+            max = Math.max(max, map[x][y] + map[x][y+1] + map[x][y+2] + map[x][y+3]);
         }
 
-        for (int i = 0; i < 4; i++) {
-            int curX = p.x + dx[i];
-            int curY = p.y + dy[i];
-
-            if (curX >= 0 && curY >= 0 && curX < n && curY < m && !visited[curX][curY]) {
-                visited[curX][curY] = true;
-                dfs(curX, curY, depth + 1, sum + map[curX][curY]);
-                visited[curX][curY] = false;
-            }
+        // | 모양
+        if (x + 3 < n) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+2][y] + map[x+3][y]);
         }
 
-
-    }
-
-    static void checkTShape(int x, int y) {
-        Point p = new Point(x, y);
-
-        for (int i = 0; i < 4; i++) {
-            int sum = map[p.x][p.y];
-            boolean range = true;
-            for (int j = 0; j < 3; j++) {
-                int dir = (i+j) % 4;
-                int curX = p.x + dx[dir];
-                int curY = p.y + dy[dir];
-
-                if (curX < 0 || curY < 0 || curX >= n || curY >= m) {
-                    range = false;
-                    break;
-                }
-
-                sum += map[curX][curY];
-            }
-
-            if (range) {
-                max = Math.max(max, sum);
-            }
+        // ㅁ 모양
+        if (x + 1 < n && y + 1 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x][y+1] + map[x+1][y+1]);
         }
-    }
+
+        // L 모양
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+2][y] + map[x+2][y+1]);
+        }
+
+        // ㄱ 반대 모양
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x+1][y] + map[x][y] + map[x][y+1] + map[x][y+2]);
+        }
+
+        // ㄱ 모양
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x][y] + map[x][y+1] + map[x][y+2] + map[x+1][y+2]);
+        }
+
+        // L 반대 모양
+        if (x + 2 < n && y - 1 >= 0) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+2][y] + map[x+2][y-1]);
+        }
+
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x+1][y] + map[x+1][y+1] + map[x+1][y+2] + map[x][y+2]);
+        }
+
+        // ㄴ 모양
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+1][y+1] + map[x+1][y+2]);
+        }
+
+        // ㄱ(세로가 더 긴) 방향
+        if (x + 2 < n && y - 1 >= 0) {
+            max = Math.max(max, map[x][y-1] + map[x][y] + map[x+1][y] + map[x+2][y]);
+        }
+
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+2][y] + map[x][y+1]);
+        }
+
+        // z 모양 1
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+1][y+1] + map[x+2][y+1]);
+        }
+
+        // z 모양 2
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x+2][y] + map[x+1][y] + map[x+1][y+1] + map[x][y+1]);
+        }
+
+        // z 모양 3
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x][y] + map[x][y+1] + map[x+1][y+1] + map[x+1][y+2]);
+        }
+
+        // z 모양 4
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x+1][y] + map[x+1][y+1] + map[x][y+1] + map[x][y+2]);
+        }
+
+        // T 모양 1
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x][y] + map[x][y+1] + map[x][y+2] + map[x+1][y+1]);
+        }
+
+        // T 모양 2
+        if (x + 1 < n && y + 2 < m) {
+            max = Math.max(max, map[x][y+1] + map[x+1][y+1] + map[x+1][y] + map[x+1][y+2]);
+        }
+
+        // T 모양 3
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x+1][y] + map[x+1][y+1] + map[x][y+1] + map[x+2][y+1]);
+        }
+
+        // T 모양 4
+        if (x + 2 < n && y + 1 < m) {
+            max = Math.max(max, map[x][y] + map[x+1][y] + map[x+2][y] + map[x+1][y+1]);
+        }
+     }
 }
