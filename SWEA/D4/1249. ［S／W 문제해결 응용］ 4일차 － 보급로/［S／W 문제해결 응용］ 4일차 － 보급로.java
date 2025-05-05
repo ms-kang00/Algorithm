@@ -6,11 +6,17 @@ public class Solution {
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     
-    static class Point {
-        int x, y;
-        public Point(int x, int y) {
+    static class Point implements Comparable<Point> {
+        int x, y, cost;
+
+        public Point(int x, int y, int cost) {
             this.x = x;
             this.y = y;
+            this.cost = cost;
+        }
+
+        public int compareTo(Point o) {
+            return this.cost - o.cost;
         }
     }
     
@@ -18,15 +24,16 @@ public class Solution {
     public static void main(String[] args) throws Exception {
         
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int T = Integer.parseInt(br.readLine());
-        
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int T;
+		T=Integer.parseInt(br.readLine());
+        int[][] map;
+        int[][] result;
 
 		for(int test_case = 1; test_case <= T; test_case++)
 		{
-            int[][] map;
-	        int[][] result;
+
 
             n = Integer.parseInt(br.readLine());
             map = new int[n][n];
@@ -49,8 +56,8 @@ public class Solution {
     }
 
     static int bfs(int[][] result, int[][] map) {
-        Queue<Point> q = new ArrayDeque<>();
-        q.offer(new Point(0, 0));
+        Queue<Point> q = new PriorityQueue<>();
+        q.offer(new Point(0, 0, 0));
         result[0][0] = 0;
 
         while (!q.isEmpty()) {
@@ -66,7 +73,7 @@ public class Solution {
 
                     if (sumCost < result[nextX][nextY]) {
                         result[nextX][nextY] = sumCost;
-                        q.offer(new Point(nextX, nextY));
+                        q.offer(new Point(nextX, nextY, sumCost));
                     }
                 }
             }
