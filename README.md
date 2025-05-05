@@ -3,6 +3,11 @@
 
 프로그래머스의 경우, 푼 문제 목록에 대한 마이그레이션이 필요합니다.
 
+## 📚 SWEA
+### 🚀 D4
+| 문제번호 | 링크 |
+| ----- | ----- |
+|1249. ［S／W 문제해결 응용］ 4일차 － 보급로|[링크](./SWEA/D4/1249.%E2%80%85%EF%BC%BBS%EF%BC%8FW%E2%80%85%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%E2%80%85%EC%9D%91%EC%9A%A9%EF%BC%BD%E2%80%854%EC%9D%BC%EC%B0%A8%E2%80%85%EF%BC%8D%E2%80%85%EB%B3%B4%EA%B8%89%EB%A1%9C/%EF%BC%BBS%EF%BC%8FW%E2%80%85%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%E2%80%85%EC%9D%91%EC%9A%A9%EF%BC%BD%E2%80%854%EC%9D%BC%EC%B0%A8%E2%80%85%EF%BC%8D%E2%80%85%EB%B3%B4%EA%B8%89%EB%A1%9C.java)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
