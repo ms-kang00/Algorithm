@@ -4,7 +4,6 @@ import java.util.*;
 public class Main {
     static int n;
     static int[][] graph;
-    static int[][] result;
 
     public static void main(String[] args) throws Exception {
         
@@ -13,7 +12,6 @@ public class Main {
 
         n = Integer.parseInt(br.readLine());
         graph = new int[n][n];
-        result = new int[n][n];
 
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -22,13 +20,19 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            bfs(i);
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (graph[i][k] == 1 && graph[k][j] == 1) {
+                        graph[i][j] = 1;
+                    }
+                }
+            }
         }
 
-        for (int[] row : result) {
-            for (int val : row) {
-                bw.write(val + " ");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                bw.write(graph[i][j] + " ");
             }
             bw.write("\n");
         }
@@ -38,21 +42,4 @@ public class Main {
     
     }
 
-    static void bfs(int start) {
-        boolean[] visited = new boolean[n];
-        Queue<Integer> q = new ArrayDeque<>();
-        q.offer(start);
-
-        while (!q.isEmpty()) {
-            int cur = q.poll();
-
-            for (int next = 0; next < n; next++) {
-                if (graph[cur][next] == 1 && !visited[next]) {
-                    q.offer(next);
-                    visited[next] = true;
-                    result[start][next] = 1;
-                }
-            }
-        }
-    }
 }
