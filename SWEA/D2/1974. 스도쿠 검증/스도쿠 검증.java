@@ -2,70 +2,70 @@ import java.io.*;
 import java.util.*;
 
 public class Solution
-{
-    static int[][] sudoku;
+ {
+    static int[][] map;
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         int T = Integer.parseInt(br.readLine());
 
-        for(int test_case = 1; test_case <= T; test_case++)
-        {
-            sudoku = new int[9][9];
+        for (int test_case = 1; test_case <= T; test_case++) {
+            map = new int[9][9];
+
             for (int i = 0; i < 9; i++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
                 for (int j = 0; j < 9; j++) {
-                    sudoku[i][j] = Integer.parseInt(st.nextToken());
+                    map[i][j] = Integer.parseInt(st.nextToken());
                 }
             }
 
-            boolean isValid = true;
+            boolean sdokuRow = true;
+            boolean sdokuColumn = true;
+            boolean sdokuThreeMultiThree = true;
 
             for (int i = 0; i < 9; i++) {
-                boolean[] check = new boolean[10];
+                List<Integer> rowList = new ArrayList<>();
                 for (int j = 0; j < 9; j++) {
-                    int num = sudoku[i][j];
-                    if (check[num]) {
-                        isValid = false;
-                        break;
-                    }
-                    check[num] = true;
+                    rowList.add(map[i][j]);
+                }
+                Set<Integer> set = new HashSet<>(rowList);
+                if (set.size() != rowList.size()) {
+                    sdokuRow = false;
                 }
             }
 
             for (int j = 0; j < 9; j++) {
-                boolean[] check = new boolean[10];
+                List<Integer> colList = new ArrayList<>();
                 for (int i = 0; i < 9; i++) {
-                    int num = sudoku[i][j];
-                    if (check[num]) {
-                        isValid = false;
-                        break;
-                    }
-                    check[num] = true;
+                    colList.add(map[i][j]);
+                }
+                Set<Integer> set = new HashSet<>(colList);
+                if (set.size() != colList.size()) {
+                    sdokuColumn = false;
                 }
             }
 
-            for (int x = 0; x < 9; x += 3) {
-                for (int y = 0; y < 9; y += 3) {
-                    boolean[] check = new boolean[10];
-                    for (int i = x; i < x + 3; i++) {
-                        for (int j = y; j < y + 3; j++) {
-                            int num = sudoku[i][j];
-                            if (check[num]) {
-                                isValid = false;
-                                break;
-                            }
-                            check[num] = true;
+            for (int i = 0; i < 9; i += 3) {
+                for (int j = 0; j < 9; j += 3) {
+                    List<Integer> threeMultiThreeArr = new ArrayList<>();
+                    for (int x = i; x < i + 3; x++) {
+                        for (int y = j; y < j + 3; y++) {
+                            threeMultiThreeArr.add(map[x][y]);
                         }
                     }
+                    Set<Integer> set = new HashSet<>(threeMultiThreeArr);
+                    if (set.size() != threeMultiThreeArr.size()) {
+                        sdokuThreeMultiThree = false;
+                    }
                 }
             }
-            bw.write("#" + test_case + " " + (isValid ? 1 : 0) + "\n");
-        }
-        bw.flush();
-        bw.close();
-    }
 
+            if (!sdokuRow || !sdokuColumn || !sdokuThreeMultiThree) {
+                System.out.println("#" + test_case + " " + 0);
+            } else {
+                System.out.println("#" + test_case + " " + 1);
+            }
+        }
+    }
 }
