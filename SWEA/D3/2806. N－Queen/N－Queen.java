@@ -1,45 +1,55 @@
 import java.io.*;
-import java.util.*;
 
-public class Solution {
-    static int[] col;
-    static int n, count;
+public class Solution
+{
+    static int N, result;
+    static boolean[] colCheck;
+    static boolean[] dialog1;
+    static boolean[] dialog2;
 
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         int T = Integer.parseInt(br.readLine());
 
-        for(int test_case = 1; test_case <= T; test_case++)
-        {
-            n = Integer.parseInt(br.readLine());
-            count = 0;
-            col = new int[n];
+        for (int test_case = 1; test_case <= T; test_case++) {
+            N = Integer.parseInt(br.readLine());
+
+            colCheck = new boolean[N];
+            dialog1 = new boolean[2 * N];
+            dialog2 = new boolean[2 * N];
+
+            result = 0;
+
             dfs(0);
-            bw.write("#" + test_case + " " + count + "\n");
+            System.out.println("#" + test_case + " " + result);
         }
-        bw.flush();
-        bw.close();
+
     }
+
     static void dfs(int row) {
-        if (row == n) {
-            count++;
+        if (row == N) {
+            result++;
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            col[row] = i;
-            boolean isValid = true;
+        for (int col = 0; col < N; col++) {
+            if (colCheck[col] || dialog1[row + col]
+                    || dialog2[row - col + N]) {
+                continue;
+            }
 
-            for (int j = 0; j < row; j++) {
-                if (col[j] == col[row] || Math.abs(col[row] - col[j]) == row - j) {
-                    isValid = false;
-                    break;
-                }
-            }
-            if (isValid) {
-                dfs(row + 1);
-            }
+            colCheck[col] = true;
+            dialog1[row + col] = true;
+            dialog2[row - col + N] = true;
+
+            dfs(row + 1);
+
+            colCheck[col] = false;
+            dialog1[row + col] = false;
+            dialog2[row - col + N] = false;
         }
     }
+
 }
