@@ -1,45 +1,54 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution {
-    static int[] arr;
-    static Deque<Integer> q = new ArrayDeque<>();
+public class Solution
+{
 
-    public static void main(String[] args) throws Exception {
+    static Deque<Integer> queue;
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int T = 10;
 
-        for (int test_case = 1; test_case <= T; test_case++) {
-            int tc = Integer.parseInt(br.readLine());
+//        int T = Integer.parseInt(br.readLine());
+
+        for (int test_case = 1; test_case <= 10; test_case++) {
+            int N = Integer.parseInt(br.readLine());
+
+            queue = new ArrayDeque<>();
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int i = 0; i < 8; i++) {
-                q.offer(Integer.parseInt(st.nextToken()));
+                queue.add(Integer.parseInt(st.nextToken()));
             }
 
-            int minus = 1;
+
+            int decrease = 1;
             while (true) {
-                int num = q.pollFirst() - minus;
-                if (num <= 0) {
-                    q.offerLast(0);
+                int polledValue = queue.poll();
+                int addData = polledValue - decrease;
+                decrease++;
+                if (decrease > 5) {
+                    decrease = 1;
+                }
+
+                if (addData <= 0) {
+                    addData = 0;
+                    queue.offer(addData);
                     break;
                 } else {
-                    q.offerLast(num);
+                    queue.offer(addData);
                 }
-                minus++;
-                if (minus > 5) {
-                    minus = 1;
-                }
+
             }
 
-            bw.write("#" + tc + " ");
-            while (!q.isEmpty()) {
-                bw.write(q.pollFirst() + " ");
+            System.out.print("#" + N + " ");
+            for (int i = 0; i < 8; i++) {
+                System.out.print(queue.pollFirst());
+                if (i < 7) {
+                    System.out.print(" ");
+                }
             }
-            bw.write("\n");
+            System.out.println();
         }
-
-        bw.flush();
-        bw.close();
     }
+
 }
