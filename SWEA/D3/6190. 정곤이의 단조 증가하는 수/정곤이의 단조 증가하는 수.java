@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Solution {
     static int[] arr;
-    static List<Integer> list;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,32 +18,25 @@ public class Solution {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
 
-            list = new ArrayList<>();
+            int max = -1;
             for (int i = 0; i < N - 1; i++) {
                 for (int j = i + 1; j < N; j++) {
-                    boolean increase = false;
+                    boolean increase = true;
                     int num = arr[i] * arr[j];
                     char[] charArray = String.valueOf(num).toCharArray();
                     for (int k = 0; k < charArray.length - 1; k++) {
-                        if (charArray[k] <= charArray[k + 1]) {
-                            increase = true;
-                        } else {
+                        if (charArray[k] > charArray[k + 1]) {
                             increase = false;
                             break;
                         }
                     }
                     if (increase) {
-                        list.add(num);
+                        max = Math.max(max, num);
                     }
                 }
             }
 
-            list.sort(null);
-            if (!list.isEmpty()) {
-                System.out.println("#" + test_case + " " + list.get(list.size() - 1));
-            } else {
-                System.out.println("#" + test_case + " " + -1);
-            }
+            System.out.println("#" + test_case + " " + max);
         }
     }
 }
