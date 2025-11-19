@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Solution {
-
+	static int[] student;
 	
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,32 +16,17 @@ public class Solution {
             int K = Integer.parseInt(st.nextToken());
              
             st = new StringTokenizer(br.readLine());
-            List<Integer> list = new ArrayList<>();
+            student = new int[N + 1];
             for (int i = 0; i < K; i++) {
-            	list.add(Integer.parseInt(st.nextToken()));
+            	int d = Integer.parseInt(st.nextToken());
+            	student[d] = 1;
             }
-            
-            List<Integer> resultList = new ArrayList<>(); 
-            boolean check = false;
-            for (int i = 1; i <= N; i++) {
-            	for (int j = 0; j < list.size(); j++) {
-            		if (i != list.get(j)) {
-            			check = true;           		
-            		} else if (i == list.get(j)) {
-            			check = false;
-            			break;
-            		}
-            	
-            	}
-            	if (check) {
-            		resultList.add(i);
-            	}
-            }
-            resultList.sort(null);
             
             System.out.print("#" + test_case + " ");
-            for (int i = 0; i < resultList.size(); i++) {
-            	System.out.print(resultList.get(i) + " ");
+            for (int i = 1; i < student.length; i ++) {
+            	if (student[i] == 0) {
+            		System.out.print(i + " ");
+            	}
             }
             System.out.println();
         }
